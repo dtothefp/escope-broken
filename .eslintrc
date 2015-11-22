@@ -1,0 +1,23 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "blockBindings": true,
+    "experimentalObjectRestSpread": true,
+    "generators": true,
+    "jsx": true,
+    "module": true,
+    "modules": true,
+    "restParams": true,
+    "spread": true
+  }
+}
