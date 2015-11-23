@@ -182,6 +182,7 @@ function spawn(gen) {
       //and will be "injected" into `yield` and caught in a variable
       res = it[method](arg);
     } catch(err) {
+      //not sure about the error handling here??
       return Promise.reject(err);
     }
 
@@ -200,12 +201,13 @@ function spawn(gen) {
         .then((val) => {
           return _co('next', val);
         }, (err) => {
+          //not sure about the error handling here??
           return _co('throw', err);
         });
     }
   }
 
-  _co('next'); //start the process by calling `.next` on the generator instance
+  return _co('next'); //start the process by calling `.next` on the generator instance
 }
 
 const upTitles = 'http://www.omdbapi.com/?s=up';
@@ -223,6 +225,8 @@ spawn(function *() {
     console.error(`Error making HTTP request for ${upTitles}`, err);
   }
 
+  //iterate through the promises, can't use a forEach here, `yield` only works in `for of`
+  //this is nice because all Promises will begin resolving inside of the `map`
   for (let data of ids.map(getWithProm)) {
     try {
       const dataById = yield data;
