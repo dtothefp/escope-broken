@@ -94,7 +94,6 @@ readAsync((err, res) => {
 /**
  * Go one step further and create a `run` function that takes a `generator` function
  * as it's only argument
- * https://strongloop.com/strongblog/how-to-generators-node-js-yield-use-cases/
  *
  * a) `run` caches the generator object
  * b) contains a private `_next` function that initially starts the generator
@@ -138,19 +137,17 @@ function run(genFn) {
  * Call the `run` function with a generator as it's first argument
  * notice how we can log returned async data with a seemingly sync API
  */
-run(function *() {
-  try {
-    const file = yield read('./mocks/file-1.js', {encoding: 'utf8'});
-    console.log('Read File', file);
+//run(function *() {
+  //try {
+    //const file = yield read('./mocks/file-1.js', {encoding: 'utf8'});
+    //console.log('Read File', file);
 
-    const html = yield superAgentThunk('http://lapwinglabs.com');
-    const $ = cheerio.load(html);
-    const title = $('title').text();
-    console.log('\n***SuperAgent HTML Title****\n', title);
-  } catch (err) {
-    console.log('File Read Error', err);
-  }
-});
+    //const html = yield superAgentThunk('http://lapwinglabs.com');
+    //console.log('SuperAgent HTML', html);
+  //} catch (err) {
+    //console.log('File Read Error', err);
+  //}
+//});
 
 /**
  * Let's give it a go with promises
@@ -168,7 +165,6 @@ function getWithProm(url) {
 
 /**
  * Create a `spawn` function to deal with promises
- * http://blog.mgechev.com/2014/12/21/handling-asynchronous-calls-with-es6-javascript-generators/
  */
 function spawn(gen) {
   const it = gen(); //instantiate the generator and return the generator object
